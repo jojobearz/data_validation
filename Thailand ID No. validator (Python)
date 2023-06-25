@@ -18,6 +18,6 @@ elif checkDigit == 1:
 else: 
     checkDigit = 11 - checkDigit
     
-# Validate result with last id (If True is valid)
+# Validate result with last id (Return true if ID No. is valid)
 isValid = checkDigit == int(id[12:13])
 
