@@ -1,0 +1,23 @@
+# Python
+
+id = "Thailand ID No."
+sumResult = 0
+checkDigit = 0
+
+# Sum result of mutiply position number with first 12 digit
+for i in range(0, 12):
+    sumResult += int(id[i:i+1]) * (13 - i)
+
+# Mod sum result with 11
+checkDigit = sumResult % 11
+
+if checkDigit == 0:
+    checkDigit = 1
+elif checkDigit == 1:
+    checkDigit = 0
+else: 
+    checkDigit = 11 - checkDigit
+    
+# Validate result with last id (If True is valid)
+isValid = checkDigit == int(id[12:13])
+
