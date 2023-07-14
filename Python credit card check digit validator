@@ -1,0 +1,26 @@
+creditcard_no = 'Your Credit Card No.'
+
+
+sum_result = 0
+
+for i in range(0, 15):
+	digit = int(creditcard_no[i:i+1])
+	if (i % 2) == 0:
+
+		if digit >= 5:
+			digit = int(str(digit * 2)[:1]) + int(str(digit * 2)[-1:])
+		else:
+			digit = digit * 2
+	sum_result += digit
+
+
+
+if (10 - int(str(sum_result)[-1:])) > 10:
+	check_digit = int(str(10-int(str(sum_result)[-1:]))[-1:])
+else:
+	check_digit = 10-int(str(sum_result)[-1:])
+
+print(check_digit)
+
+print(str(check_digit) == creditcard_no[-1:])
+
