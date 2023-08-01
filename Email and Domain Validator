@@ -1,0 +1,35 @@
+import re
+import dns.resolver
+
+def is_valid_email(email):
+    # Regular expression for email validation
+    pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    if not re.match(pattern, email):
+        return False
+
+    # Extract domain from email
+    _, domain = email.split('@', 1)
+
+    try:
+        # Get MX records for the domain
+        mx_records = dns.resolver.query(domain, 'MX')
+        return any(mx_records)
+    except dns.resolver.NoAnswer:
+        # The domain has no MX record
+        return False
+    except dns.resolver.NXDOMAIN:
+        # The domain does not exist
+        return False
+    except Exception as e:
+        # Handle other DNS resolution errors
+        print(f"Error checking domain: {e}")
+        return False
+
+# Test the function
+email1 = "jojo.bearz@example.com"
+email2 = "invalid_email@nonexistentdomains.com"
+email3 = "jojobearz@existingdomain.com"
+
+print(f"{email1}: {is_valid_email(email1)}")
+print(f"{email2}: {is_valid_email(email2)}")
+print(f"{email3}: {is_valid_email(email3)}")
